@@ -17,7 +17,6 @@ export interface WorkloadItemProps extends
   WorkloadItemStateProps,
   WorkloadItemMethodProps {}
 
-
 const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => (
   <div className="WorkloadItem">
     <div>

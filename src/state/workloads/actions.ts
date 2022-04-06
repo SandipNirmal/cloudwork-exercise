@@ -3,7 +3,6 @@ import { createAction } from 'typesafe-actions';
 import { Status } from './types';
 import { SUBMIT, CREATED, CANCEL, UPDATE_STATUS } from './constants';
 
-
 export const submit = createAction(SUBMIT, resolve => (params: { complexity: number }) => resolve({ complexity: params.complexity }));
 
 export const created = createAction(CREATED, resolve =>

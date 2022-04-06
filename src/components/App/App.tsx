@@ -17,7 +17,7 @@ class App extends PureComponent {
                 <WorkloadListContainer />
               </div>
 
-              <div className="item">
+              <div className="item" style={{ height: 'fit-content' }}>
                 <WorkloadFormContainer />
               </div>
             </div>

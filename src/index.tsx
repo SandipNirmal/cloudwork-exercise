@@ -26,9 +26,11 @@ epicMiddleware.run(epics);
 
 // demo actions
 store.dispatch(WorkloadActions.submit({ complexity: 10 }));
+
+const item1 = +`${Date.now()}`;
 store.dispatch(
   WorkloadActions.created({
-    id: 999,
+    id: item1,
     complexity: 10,
     completeDate: moment()
       .add(10, 'second')
@@ -37,16 +39,14 @@ store.dispatch(
   })
 );
 
-store.dispatch(
-  WorkloadActions.created({
-    id: 12,
-    complexity: 10,
-    completeDate: moment()
-      .add(10, 'second')
-      .toDate(),
-    status: 'WORKING',
-  })
-);
+// setTimeout(() => {
+//   store.dispatch(
+//     WorkloadActions.updateStatus({
+//       id: item1,
+//       status: 'SUCCESS',
+//     })
+//   );
+// }, 5000);
 
 ReactDOM.render(
   <Provider store={store}>

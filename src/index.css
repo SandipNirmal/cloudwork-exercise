@@ -107,3 +107,9 @@ h2 {
   background-color: rgb(110 231 183);
   margin-left: 1rem;
 }
+
+.WorkloadItem-statusText {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
