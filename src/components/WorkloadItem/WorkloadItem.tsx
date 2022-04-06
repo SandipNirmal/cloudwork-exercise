@@ -2,7 +2,6 @@ import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Status } from '../../state/workloads'
 
-
 export interface WorkloadItemStateProps {
   id: number;
   complexity: number;

@@ -2,26 +2,28 @@ import React, { PureComponent } from 'react';
 
 import { WorkloadListContainer } from '../WorkloadList';
 import { WorkloadFormContainer } from '../WorkloadForm';
-import './App.css';
-
 
 class App extends PureComponent {
   render() {
     return (
-      <div>
-        <h1>CloudWork</h1>
-        <hr />
-        
-        <div >
-          <WorkloadFormContainer />
-        </div>
-        <hr />
+      <main className="container">
+        <div className="content">
+          <h1>CloudWork</h1>
+          <hr />
+          <section className="py-4">
+            <h2>Workloads</h2>
+            <div className="flex">
+              <div className="flex-1 mr-4">
+                <WorkloadListContainer />
+              </div>
 
-        <div>
-          <h2>Workloads</h2>
-          <WorkloadListContainer />
+              <div className="item">
+                <WorkloadFormContainer />
+              </div>
+            </div>
+          </section>
         </div>
-      </div>
+      </main>
     );
   }
 }
