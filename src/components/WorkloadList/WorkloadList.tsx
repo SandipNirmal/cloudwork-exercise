@@ -2,8 +2,9 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RootAction, RootState } from '../../state';
-import { cancel } from '../../state/workloads/actions';
+import { cancel, updateStatus } from '../../state/workloads/actions';
 import { WorkloadItem, WorkloadItemStateProps } from '../WorkloadItem';
+import { Status } from '../../state/workloads';
 
 export interface WorkloadListStateProps {
   workloads: WorkloadItemStateProps[];
@@ -11,6 +12,7 @@ export interface WorkloadListStateProps {
 
 export interface WorkloadListDispatchProps {
   cancelWorkload: (id: number) => void;
+  updateStatus: (params: { id: number; status: Status }) => void;
 }
 
 export interface WorkloadListProps
@@ -20,8 +22,13 @@ export interface WorkloadListProps
 const WorkloadList: React.SFC<WorkloadListProps> = ({
   workloads,
   cancelWorkload,
-}) =>
-  !workloads.length ? (
+  updateStatus,
+}) => {
+  const handleCancelWorkload = (id: number): void => {
+    cancelWorkload(id);
+  };
+
+  return !workloads.length ? (
     <span>No workloads to display</span>
   ) : (
     <ol className="flex flex-col">
@@ -29,12 +36,13 @@ const WorkloadList: React.SFC<WorkloadListProps> = ({
         <li key={workload.id} className="mb-4 item">
           <WorkloadItem
             {...workload}
-            onCancel={() => cancelWorkload(workload.id)}
+            onCancel={() => handleCancelWorkload(workload.id)}
           />
         </li>
       ))}
     </ol>
   );
+};
 
 const mapStateToProps = (state: RootState): WorkloadListStateProps => ({
   workloads: Object.values(state.workloads),
@@ -44,6 +52,13 @@ const mapDispatchToProps = (
   dispatch: Dispatch<RootAction>
 ): WorkloadListDispatchProps => ({
   cancelWorkload: (id: number) => dispatch(cancel({ id })),
+  updateStatus: (params: { id: number; status: Status }) =>
+    dispatch(
+      updateStatus({
+        id: params.id,
+        status: params.status,
+      })
+    ),
 });
 
 const WorkloadListContainer = connect(

@@ -1,21 +1,11 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
-import { submit, created } from '../../state/workloads/actions';
-import { Status } from '../../state/workloads/types';
+import { submit } from '../../state/workloads/actions';
 
 interface WorkloadFormDispatchProps {
   submitWorkload: (complexity: number) => void;
-  createWorkload: (
-    params: {
-      id: number;
-      status: Status;
-      complexity: number;
-      completeDate: Date;
-    }
-  ) => void;
 }
 
 interface WorkloadFormProps extends WorkloadFormDispatchProps {}
@@ -36,17 +26,8 @@ class WorkloadForm extends React.PureComponent<
 
   handleSubmit = (e: React.MouseEvent) => {
     const { complexity } = this.state;
-    const { submitWorkload, createWorkload } = this.props;
+    const { submitWorkload } = this.props;
     submitWorkload(complexity);
-    createWorkload({
-      id: +`${Date.now()}`,
-      complexity,
-      completeDate: moment()
-        .add(10, 'second')
-        .toDate(),
-      status: 'WORKING',
-    });
-
     this.setState(this.defaultState);
     e.preventDefault();
   };
@@ -84,20 +65,6 @@ class WorkloadForm extends React.PureComponent<
 
 const mapDispatchToProps = (dispatch: Dispatch): WorkloadFormDispatchProps => ({
   submitWorkload: (complexity: number) => dispatch(submit({ complexity })),
-  createWorkload: (params: {
-    id: number;
-    status: Status;
-    complexity: number;
-    completeDate: Date;
-  }) =>
-    dispatch(
-      created({
-        id: params.id,
-        status: params.status,
-        completeDate: params.completeDate,
-        complexity: params.complexity,
-      })
-    ),
 });
 
 const WorkloadFormContainer = connect(
