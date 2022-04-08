@@ -1,7 +1,6 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
-import { Status } from '../../state/workloads'
-
+import { Status } from '../../state/workloads';
 
 export interface WorkloadItemStateProps {
   id: number;
@@ -14,41 +13,44 @@ export interface WorkloadItemMethodProps {
   onCancel: () => void;
 }
 
-export interface WorkloadItemProps extends 
-  WorkloadItemStateProps,
-  WorkloadItemMethodProps {}
+export interface WorkloadItemProps
+  extends WorkloadItemStateProps,
+    WorkloadItemMethodProps {}
 
+const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => {
+  const status = props.status.toLowerCase();
 
-const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => (
-  <div className="WorkloadItem">
-    <div>
-      <h3 className="WorkloadItem-heading">Workload #{props.id}</h3>
-      <span className="WorkloadItem-subHeading">Complexity: {props.complexity}</span>
+  return (
+    <div className={`mb-4 item ${status}`}>
+      <div className="WorkloadItem">
+        <div>
+          <h3 className="WorkloadItem-heading">Workload #{props.id}</h3>
+          <span className="WorkloadItem-subHeading">
+            Complexity: {props.complexity}
+          </span>
+        </div>
+        <div>
+          {props.status === 'WORKING' ? (
+            <>
+              <span>
+                <TimeAgo date={props.completeDate} />
+              </span>
+              <button
+                className="WorkloadItem-secondaryButton"
+                onClick={props.onCancel}
+              >
+                Cancel
+              </button>
+            </>
+          ) : (
+            <span className="WorkloadItem-statusText">{status}</span>
+          )}
+        </div>
+      </div>
     </div>
-    <div>
-      {props.status === 'WORKING'
-        ? (
-          <>
-            <span><TimeAgo date={props.completeDate} /></span>
-            <button 
-              className="WorkloadItem-secondaryButton" 
-              onClick={props.onCancel}
-            >
-              Cancel
-            </button>
-          </>
-        )
-        : (
-          <span className="WorkloadItem-statusText">{props.status.toLowerCase()}</span>
-        )
-      }
-    </div>
-  </div>
-);
-
-
-export { 
-  WorkloadItem,
+  );
 };
+
+export { WorkloadItem };
 
 export default WorkloadItem;
