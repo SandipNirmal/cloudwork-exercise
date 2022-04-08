@@ -33,7 +33,7 @@ const WorkloadList: React.SFC<WorkloadListProps> = ({
   ) : (
     <ol className="flex flex-col">
       {workloads.map((workload) => (
-        <li key={workload.id} className="mb-4 item">
+        <li key={workload.id}>
           <WorkloadItem
             {...workload}
             onCancel={() => handleCancelWorkload(workload.id)}

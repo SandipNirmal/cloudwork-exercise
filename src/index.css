@@ -81,6 +81,10 @@ h2 {
 .item {
   padding: 8px 24px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border-width: 1px;
+  border-color: #e1e1e1;
+  border-style: solid;
 }
 
 .border {
@@ -112,4 +116,19 @@ h2 {
   font-size: 1rem;
   font-weight: 500;
   text-transform: capitalize;
+}
+
+.item.success {
+  border-color: #10b981;
+  /* box-shadow: 0 0 2px 2px #6ee7b7; */
+}
+
+.item.failure {
+  border-color: #ef4444;
+  /* box-shadow: 0 0 2px 2px #fca5a5; */
+}
+
+.item.canceled {
+  border-color: #64748b;
+  /* box-shadow: 0 0 2px 2px #cbd5e1; */
 }

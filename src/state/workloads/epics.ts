@@ -1,5 +1,5 @@
 import { combineEpics, Epic } from 'redux-observable';
-import { merge, from } from 'rxjs';
+import { from } from 'rxjs';
 import {
   filter,
   map,
